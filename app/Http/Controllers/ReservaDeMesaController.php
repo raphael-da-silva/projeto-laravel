@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class ReservaDeMesaController extends Controller
 {
     public function __construct()
     {
@@ -14,6 +14,11 @@ class HomeController extends Controller
 
     public function index(): Renderable
     {
-        return view('home');
+        return view('reserva');
+    }
+
+    public function submit(Request $request)
+    {
+        dump($request->input('horario'), $request->input('mesa'));
     }
 }

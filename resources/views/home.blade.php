@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
@@ -14,10 +11,23 @@
                         </div>
                     @endif
 
-                    Você está logado.
+                    <hr>
+
+                    Você está logado <span class="fw-bold">{{ Auth::user()->name }}</span>
+
+                    <hr>
+
+                    <div class="bg-success p-2 text-white">
+                        O máximo de mesas do restaurante são 15.
+                    </div>
+
+                    <div class="bg-warning p-2">
+                        Já estão reservadas [] mesas
+                    </div>
+
+                    <hr>
+
+                    <a href="/reserva" class="btn btn-lg btn-primary">Fazer uma reserva</a>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 @endsection
