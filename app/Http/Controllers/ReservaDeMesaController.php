@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReservaEfetuada;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservaDeMesaController extends Controller
 {
@@ -19,6 +21,22 @@ class ReservaDeMesaController extends Controller
 
     public function submit(Request $request)
     {
-        dump($request->input('horario'), $request->input('mesa'));
+        $reserva = new ReservaEfetuada;
+        $horario = $request->input('horario');
+        $mesa    = $request->input('mesa');
+        $dia     = $request->input('dia');
+
+        $usuario = Auth::user()->id;
+        
+        if($reserva->mesaEstaDisponivel()){
+            $reserva->save([
+                'horario' => '',
+                'mesa'    => '',
+                'dia'     => '',
+                'id_usuario' => $usuario
+            ]);
+        }
+
+        dump($horario, $dia, $mesa);
     }
 }

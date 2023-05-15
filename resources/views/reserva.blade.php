@@ -23,6 +23,13 @@
             <hr>
 
             <div class="form-group">
+                <label>Escolha a data/dia:</label>
+                <input type="date" name="dia">
+            </div>
+
+            <hr>
+
+            <div class="form-group">
                 <label>Escolha um horário:</label>
                 <div class="form-control">
                     Apenas horários entre 18:00 até 23:59 são disponiveis - 
