@@ -41,6 +41,16 @@
 
             <input type="submit" class="btn btn-primary btn-lg" value="efetuar reserva">
         </form>
+
+        <hr>
+
+        @if ($errors->any())
+            <div class="alert bg-danger text-white">
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
     </div>
 </div>
 

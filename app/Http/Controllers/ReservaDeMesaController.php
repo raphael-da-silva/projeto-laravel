@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ReservaEfetuada;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,26 +15,38 @@ class ReservaDeMesaController extends Controller
         return view('reserva');
     }
 
-    public function submit(Request $request)
+    public function submit(Request $request): RedirectResponse
     {
         $reserva = new ReservaEfetuada;
         $horario = $request->input('horario');
         $mesa    = $request->input('mesa');
         $dia     = $request->input('dia');
-
         $usuario = Auth::user()->id;
 
-        //dd($horario, $dia, $mesa, $usuario);
-        
-        //if($reserva->mesaEstaDisponivel()){
-            $reserva->save([
-                'horario' => $horario,
-                'numero_da_mesa'    => (int) $mesa,
-                'dia'     => $dia,
-                'id_usuario' => $usuario
-            ]);
-        //}
+        if(!$reserva->dataValidaParaReservar($dia)){
+            return redirect('/reserva')->withErrors([
+                'A data que você escolheu já passou.'
+            ]); 
+        }
 
-        dump($horario, $dia, $mesa);
+        if($reserva->tentativaDeReservarNoDomingo($dia)){
+            return redirect('/reserva')->withErrors([
+                'Você não pode reservar mesa no domingo'
+            ]);
+        }
+
+        if(!$reserva->mesaEstaDisponivel($mesa, $dia, $horario)){
+            return redirect('/reserva')->withErrors([
+                'Essa mesa não está disponivel no dia e horario que você escolheu'
+            ]); 
+        }
+
+        $reserva->horario = $horario;
+        $reserva->numero_da_mesa = $mesa;
+        $reserva->dia = $dia;
+        $reserva->id_usuario = $usuario;
+        $reserva->save();
+
+        return redirect('/lista')->with('success', 'Reserva efetuada com sucesso.');
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,14 +14,30 @@ class ReservaEfetuada extends Model
 
     protected $table = 'reservas';
 
-    public function horarioEstaDisponivel(): bool
+    public function tentativaDeReservarNoDomingo(string $dia): bool
     {
-        return false;
+        $d = new Carbon($dia);
+        $d = $d->format('l');
+
+        return ($d == 'Sunday');
     }
 
-    public function mesaEstaDisponivel(int $mesa, string $dia, int $hora, int $idUsuario): bool
+    public function dataValidaParaReservar(string $dia): bool
     {
-        return false;
+        $d = new Carbon($dia);  
+        $t = Carbon::today();
+
+        return $d->timestamp >= $t->timestamp; // evita que datas já passadas sejam escolhidas
+    }
+
+    public function mesaEstaDisponivel(int $mesa, string $dia, string $hora): bool
+    {
+        $query = DB::table('reservas');
+        $query->where('numero_da_mesa', $mesa);
+        $query->where('dia', $dia);
+        $query->where('horario', $hora);
+
+        return $query->doesntExist();
     }
 
     public function listaDeReservas(): array

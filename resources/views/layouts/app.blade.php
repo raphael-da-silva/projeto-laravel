@@ -23,7 +23,10 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
 
-                    <a class="btn btn-primary" href="/lista">Ver lista de reservas</a>
+                    @auth
+                        <a class="btn btn-warning" href="/lista">Ver lista de reservas</a>
+                        <a class="btn btn-primary" href="/reserva">Reservar</a>
+                    @endauth
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -77,6 +80,12 @@
         </nav>
 
         <main class="py-4">
+            @if (session('success'))
+                <div class="bg-success p-2 text-white text-center mb-2">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8">@yield('content')</div>
