@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_da_mesa');
             $table->foreignIdFor(User::class, 'id_usuario');
+            $table->integer('numero_da_mesa');
             $table->time('horario');
             $table->date('dia');
             $table->timestamps();

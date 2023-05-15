@@ -22,15 +22,17 @@ class ReservaDeMesaController extends Controller
         $dia     = $request->input('dia');
 
         $usuario = Auth::user()->id;
+
+        //dd($horario, $dia, $mesa, $usuario);
         
-        if($reserva->mesaEstaDisponivel()){
+        //if($reserva->mesaEstaDisponivel()){
             $reserva->save([
-                'horario' => '',
-                'mesa'    => '',
-                'dia'     => '',
+                'horario' => $horario,
+                'numero_da_mesa'    => (int) $mesa,
+                'dia'     => $dia,
                 'id_usuario' => $usuario
             ]);
-        }
+        //}
 
         dump($horario, $dia, $mesa);
     }

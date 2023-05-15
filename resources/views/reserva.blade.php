@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label>Escolha a data/dia:</label>
-                <input type="date" name="dia">
+                <input type="date" name="dia" required>
             </div>
 
             <hr>

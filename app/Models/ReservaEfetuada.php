@@ -10,6 +10,8 @@ class ReservaEfetuada extends Model
 {
     use HasFactory;
 
+    protected $table = 'reservas';
+
     public function horarioEstaDisponivel(): bool
     {
         return false;
@@ -22,6 +24,11 @@ class ReservaEfetuada extends Model
 
     public function listaDeReservas(): array
     {
-        return DB::table('reservas')->get()->toArray();
+        return DB::table('reservas')->get()->map(function($item){
+
+            $item->usuario = User::where('id', $item->id_usuario)->first();
+            return $item;
+
+        })->toArray();
     }
 }
