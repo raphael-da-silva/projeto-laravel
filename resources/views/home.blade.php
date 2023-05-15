@@ -13,7 +13,7 @@
 
                     <hr>
 
-                    Você está logado <span class="fw-bold">{{ Auth::user()->name }}</span>
+                    Você está logado como: <span class="fw-bold">{{ Auth::user()->name }}</span>
 
                     <hr>
 
@@ -21,8 +21,8 @@
                         O máximo de mesas do restaurante são 15.
                     </div>
 
-                    <div class="bg-warning p-2">
-                        Já estão reservadas [] mesas
+                    <div class="bg-warning p-2 fw-bold">
+                        Total de reserva(s): {{ $total }} mesa(s)
                     </div>
 
                     <hr>
