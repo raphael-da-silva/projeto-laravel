@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('revervas', function (Blueprint $table) {
+        Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->integer('numero_da_mesa');
             $table->foreignIdFor(User::class, 'id_usuario');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('revervas');
+        Schema::dropIfExists('reservas');
     }
 };

@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservaDeMesaController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index(): Renderable
     {
         return view('reserva');

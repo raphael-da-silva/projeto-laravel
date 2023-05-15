@@ -21,6 +21,13 @@ Route::get('/', function () {
 Auth::routes();
 
 // Rotas com controllers
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/reserva', [App\Http\Controllers\ReservaDeMesaController::class, 'index'])->name('reserva');
-Route::post('/efetuar-reserva', [App\Http\Controllers\ReservaDeMesaController::class, 'submit'])->name('efetuar');
+
+Route::middleware('auth')->group(function(){
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/reserva', [App\Http\Controllers\ReservaDeMesaController::class, 'index'])->name('reserva');
+    Route::post('/efetuar-reserva', [App\Http\Controllers\ReservaDeMesaController::class, 'submit'])->name('efetuar');
+    Route::get('/lista', [App\Http\Controllers\ListaDasMesasReservadasController::class, 'index'])->name('lista');
+
+});
+

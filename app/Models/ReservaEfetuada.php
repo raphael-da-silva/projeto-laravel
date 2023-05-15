@@ -10,9 +10,9 @@ class ReservaEfetuada extends Model
 {
     use HasFactory;
 
-    public function horarioEstaDisponivel
+    public function horarioEstaDisponivel(): bool
     {
-
+        return false;
     }
 
     public function mesaEstaDisponivel(int $mesa, string $dia, int $hora, int $idUsuario): bool
@@ -22,6 +22,6 @@ class ReservaEfetuada extends Model
 
     public function listaDeReservas(): array
     {
-        return DB::table('reservas')->get();
+        return DB::table('reservas')->get()->toArray();
     }
 }
