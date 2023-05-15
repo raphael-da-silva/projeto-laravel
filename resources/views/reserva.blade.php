@@ -25,6 +25,7 @@
             <div class="form-group">
                 <label>Escolha a data/dia:</label>
                 <input type="date" name="dia" required>
+                <div class="badge text-danger fw-bold">Não é possivel reservar nos domingos.</div>
             </div>
 
             <hr>

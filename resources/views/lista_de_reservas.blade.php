@@ -24,7 +24,7 @@
                 <tr>
                     <td>Mesa {{ $reserva->numero_da_mesa }}</td>
                     <td>{{ $reserva->horario }}</td>
-                    <td>{{ $reserva->dia }}</td>
+                    <td>{{ Carbon\Carbon::createFromFormat('Y-m-d', $reserva->dia)->format('d/m/Y') }}</td>
                     <td>{{ $reserva->usuario->name }} / {{ $reserva->usuario->email }}</td>
                 </tr>
             @empty
