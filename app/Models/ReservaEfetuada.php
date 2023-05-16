@@ -22,12 +22,17 @@ class ReservaEfetuada extends Model
         return ($d == 'Sunday');
     }
 
-    public function dataValidaParaReservar(string $dia): bool
+    public function dataValidaParaReservaFutura(string $dia): bool
     {
         $d = new Carbon($dia);  
         $t = Carbon::today();
 
         return $d->timestamp >= $t->timestamp; // evita que datas já passadas sejam escolhidas
+    }
+
+    public function horarioAbertoParaReservar(string $hora): bool
+    {
+        return false;
     }
 
     public function mesaEstaDisponivel(int $mesa, string $dia, string $hora): bool

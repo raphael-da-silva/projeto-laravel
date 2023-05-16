@@ -16,19 +16,17 @@
     <body class="main mt-5 m-auto">
         <div class=" bg-dark text-white p-4 text-center">
             <div class="">
-                <h4>
+                <h3 class="bg-light p-2 text-dark">
                     Teste prático de PHP.
-                </h4>
-
-                <hr>
+                </h3>
 
                 <div class="alert alert-warning p-2">
                     <h5>
                         Ferramentas usadas/stack:
-                        
                     </h5>
 
                     <div>
+                        - PHP <br>
                         - Laravel <br>
                         - Bootstrap <br>
                         - MySql
@@ -43,8 +41,6 @@
                 </div>
             </div>
 
-            <hr>
-
             @if (Route::has('login'))
                 <div class="bg-grey p-1">
                     @auth
@@ -52,14 +48,14 @@
                             Dashboard/Area restrita [vc já está logado]
                         </a>
                     @else
-                        <div class="text-warning fw-bold mb-3">
-                            Utilize os botoes abaixo para começar
+                        <div class="badge d-block text-info fw-bold mb-3 m-0">
+                            Utilize o botão abaixo para começar
                         </div>
 
-                        <a href="{{ route('login') }}" class="btn btn-info">Log in</a>
+                        <a href="{{ route('login') }}" class="btn btn-info">efetuar Log in</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="btn btn-info">Registrar</a>
+                            <!-- <a href="{{ route('register') }}" class="btn btn-info">Registrar</a> -->
                         @endif
                     @endauth
                 </div>

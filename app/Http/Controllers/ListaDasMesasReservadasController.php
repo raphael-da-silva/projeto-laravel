@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReservaEfetuada;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Renderable;
 
 class ListaDasMesasReservadasController extends Controller

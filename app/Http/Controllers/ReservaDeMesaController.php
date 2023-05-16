@@ -23,10 +23,16 @@ class ReservaDeMesaController extends Controller
         $dia     = $request->input('dia');
         $usuario = Auth::user()->id;
 
-        if(!$reserva->dataValidaParaReservar($dia)){
+        if(!$reserva->dataValidaParaReservaFutura($dia)){
             return redirect('/reserva')->withErrors([
-                'A data que você escolheu já passou.'
+                'A data que você escolheu já passou, logo não é valida para reserva.'
             ]); 
+        }
+
+        if($reserva->horarioAbertoParaReservar($horario)){
+            return redirect('/reserva')->withErrors([
+                'Apenas disponíveis horários de 18:00 até 23:59'
+            ]);
         }
 
         if($reserva->tentativaDeReservarNoDomingo($dia)){
@@ -38,7 +44,7 @@ class ReservaDeMesaController extends Controller
         if(!$reserva->mesaEstaDisponivel($mesa, $dia, $horario)){
             return redirect('/reserva')->withErrors([
                 'Essa mesa não está disponivel no dia e horario que você escolheu'
-            ]); 
+            ]);
         }
 
         $reserva->horario = $horario;
