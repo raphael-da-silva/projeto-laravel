@@ -52,7 +52,7 @@
                             Utilize o botão abaixo para começar
                         </div>
 
-                        <a href="{{ route('login') }}" class="btn btn-info">efetuar Log in</a>
+                        <a href="{{ route('login') }}" class="btn btn-info btn-lg">efetuar Log in / entrar</a>
 
                         @if (Route::has('register'))
                             <!-- <a href="{{ route('register') }}" class="btn btn-info">Registrar</a> -->
