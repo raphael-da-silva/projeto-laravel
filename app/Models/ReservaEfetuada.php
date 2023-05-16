@@ -32,7 +32,11 @@ class ReservaEfetuada extends Model
 
     public function horarioAbertoParaReservar(string $hora): bool
     {
-        return false;
+        $inicio  = Carbon::createFromTimeString('18:00');
+        $termino = Carbon::createFromTimeString('23:59');
+        $reserva = Carbon::createFromTimeString($hora);
+
+        return $reserva->between($inicio, $termino);
     }
 
     public function mesaEstaDisponivel(int $mesa, string $dia, string $hora): bool

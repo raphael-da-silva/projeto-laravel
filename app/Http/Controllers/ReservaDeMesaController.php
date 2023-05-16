@@ -26,14 +26,14 @@ class ReservaDeMesaController extends Controller
         if(!$reserva->dataValidaParaReservaFutura($dia)){
             return redirect('/reserva')->withErrors([
                 'A data que você escolheu já passou, logo não é valida para reserva.'
-            ]); 
+            ]);
         }
 
-        // if($reserva->horarioAbertoParaReservar($horario)){
-        //     return redirect('/reserva')->withErrors([
-        //         'Apenas disponíveis horários de 18:00 até 23:59'
-        //     ]);
-        // }
+        if(!$reserva->horarioAbertoParaReservar($horario)){
+            return redirect('/reserva')->withErrors([
+                'Apenas disponíveis horários de 18:00 até 23:59'
+            ]);
+        }
 
         if($reserva->tentativaDeReservarNoDomingo($dia)){
             return redirect('/reserva')->withErrors([

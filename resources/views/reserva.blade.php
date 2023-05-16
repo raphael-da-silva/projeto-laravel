@@ -34,7 +34,7 @@
                 <label>Escolha um horário:</label>
                 <div class="form-control bg-warning">
                     Apenas horários entre 18:00 até 23:59 são disponiveis - 
-                    <input type="time" name="horario" min="18:00" max="23:59" required>
+                    <input type="time" name="horario" required>
                 </div>
             </div>
 
