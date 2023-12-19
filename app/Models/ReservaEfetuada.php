@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,15 +46,5 @@ class ReservaEfetuada extends Model
         $query->where('horario', $hora);
 
         return $query->doesntExist();
-    }
-
-    public function listaDeReservas(): array
-    {
-        return DB::table('reservas')->get()->map(function($item){
-
-            $item->usuario = User::where('id', $item->id_usuario)->first();
-            return $item;
-
-        })->toArray();
     }
 }
