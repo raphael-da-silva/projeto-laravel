@@ -52,11 +52,4 @@ $app->singleton(
 |
 */
 
-// Dependências
-$app->bind(\App\Http\Controllers\ListaDasMesasReservadasController::class, function(){
-    return new \App\Http\Controllers\ListaDasMesasReservadasController(
-        new \App\Models\ListaDeReservas
-    );
-});
-
 return $app;

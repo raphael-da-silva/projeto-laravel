@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReservaEfetuada;
+use App\Models\ListaDeReservas;
 use Illuminate\Contracts\Support\Renderable;
 
 class HomeController extends Controller
 {
+    private $listaDeReservas;
+
+    public function __construct(ListaDeReservas $listaDeReservas)
+    {
+        $this->listaDeReservas = $listaDeReservas;
+    }
+
     public function index(): Renderable
     {
-        $lista = new ReservaEfetuada;
-
         return view('home', [
-            'total' => count($lista->listaDeReservas())
+            'total' => count($this->listaDeReservas->obterLista())
         ]);
     }
 }
