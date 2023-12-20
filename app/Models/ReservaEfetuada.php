@@ -47,4 +47,13 @@ class ReservaEfetuada extends Model
 
         return $query->doesntExist();
     }
+
+    public function efetuar(string $hora, int $mesa, string $dia, int $usuario): bool
+    {
+        $this->horario = $hora;
+        $this->numero_da_mesa = $mesa;
+        $this->dia = $dia;
+        $this->id_usuario = $usuario;
+        return $this->save();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ReservaEfetuada;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,6 +35,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Http\Controllers\HomeController::class, function($app){
             return new \App\Http\Controllers\HomeController(
                 $app->get('ListaDeReservas')
+            );
+        });
+
+        $this->app->bind(\App\Http\Controllers\ReservaDeMesaController::class, function($app){
+            return new \App\Http\Controllers\ReservaDeMesaController(
+                new ReservaEfetuada
             );
         });
     }
