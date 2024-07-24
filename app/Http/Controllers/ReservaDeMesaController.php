@@ -22,7 +22,7 @@ class ReservaDeMesaController extends Controller
         return view('reserva');
     }
 
-    private function redicionarComErro($message): RedirectResponse
+    private function redirecionarComErro(string $message): RedirectResponse
     {
         return redirect('/reserva')->withErrors([$message]);
     }
@@ -34,19 +34,19 @@ class ReservaDeMesaController extends Controller
         $dia     = $request->input('dia');
 
         if(!$this->reserva->dataValidaParaReservaFutura($dia)){
-            return $this->redicionarComErro('A data que você escolheu já passou, logo não é valida para reserva.');
+            return $this->redirecionarComErro('A data que você escolheu já passou, logo não é valida para reserva.');
         }
 
         if(!$this->reserva->horarioAbertoParaReservar($horario)){
-            return $this->redicionarComErro('Apenas disponíveis horários de 18:00 até 23:59');
+            return $this->redirecionarComErro('Apenas disponíveis horários de 18:00 até 23:59');
         }
 
         if($this->reserva->tentativaDeReservarNoDomingo($dia)){
-            return $this->redicionarComErro('Você não pode reservar mesa no domingo');
+            return $this->redirecionarComErro('Você não pode reservar mesa no domingo');
         }
 
         if(!$this->reserva->mesaEstaDisponivel($mesa, $dia, $horario)){
-            return $this->redicionarComErro('Essa mesa não está disponivel no dia e horario que você escolheu');
+            return $this->redirecionarComErro('Essa mesa não está disponivel no dia e horario que você escolheu');
         }
 
         $this->reserva->efetuar($horario, $mesa, $dia, Auth::user()->id);
